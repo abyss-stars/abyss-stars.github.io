@@ -3,11 +3,11 @@
   <title>��ҹͤ</title>
   
   <subtitle>��Ȼ���ף�����ȴ�ڵƻ���ɺ����</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://abyss-stars.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2023-06-06T03:08:17.544Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://abyss-stars.github.io/"/>
+  <updated>2023-06-06T09:46:20.319Z</updated>
+  <id>https://abyss-stars.github.io/</id>
   
   <author>
     <name>abyss-stars</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>入站必读</title>
-    <link href="http://example.com/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/"/>
-    <id>http://example.com/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/</id>
+    <link href="https://abyss-stars.github.io/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/"/>
+    <id>https://abyss-stars.github.io/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/</id>
     <published>2023-06-06T03:01:01.000Z</published>
-    <updated>2023-06-06T03:08:17.544Z</updated>
+    <updated>2023-06-06T09:46:20.319Z</updated>
     
     
     <summary type="html">&lt;p&gt;入站后请先阅读此文&lt;/p&gt;</summary>
