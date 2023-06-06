@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-06-06T03:05:40.981Z</updated>
+  <updated>2023-06-06T03:08:17.544Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,16 +21,12 @@
     <link href="http://example.com/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/"/>
     <id>http://example.com/2023/06/06/%E5%85%A5%E7%AB%99%E5%BF%85%E8%AF%BB/</id>
     <published>2023-06-06T03:01:01.000Z</published>
-    <updated>2023-06-06T03:05:40.981Z</updated>
+    <updated>2023-06-06T03:08:17.544Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h1><p>唔….欢迎光临小站AWA这个站点是站主用来试手的第一个站点～。所以说如果本站之后出现了什么问题请勿惊讶（笑）。</p><p>然后的话，本站是借用github的免费域名＋Hexo进行搭建，主要用作个人博客。</p><p><strong>内容：</strong></p><p>由于站主看的东西比较杂，所以说今后的文章标题会比如下格式命名：</p><p>  ［类别］＋标题名称</p><p>类别包括但不限于：新闻时政，游戏分享，游戏资讯，好书推荐，技术栈，奇思妙想，音乐闲话，影视剧分享及推荐，历史茶馆等等。</p><hr><h1 id="题外话："><a href="#题外话：" class="headerlink" title="题外话："></a>题外话：</h1><p>有关分享的内容，大都以网盘链接出现，包括但不限于：阿里云盘，百度云盘，夸克网盘，蓝奏云等，可以提前注册好。</p><p>还会有磁力链接或种子，若不知道如何使用 <a href="https://zhuanlan.zhihu.com/p/482703795" title="磁力链接使用方式。">看这个</a>。</p><p>噢对了！由于本站是静态站点，所以不会有评论区等需要数据库的功能出现，当然，如果大家多多光顾小站，再点点收藏啥的（坏笑）。站主就自掏腰包租个服务器（awa）</p><p>要是有技术佬的话，请加<a href="https://abyss-stars.github.io/" title="2359933809">Q</a>，想请教一些问题QAQ.</p><p>还需要说明的是，在每篇文章的最后可能会有站主夹带的“私货”，若不感兴趣可直接略去。</p>]]></content>
+    <content type="html"><![CDATA[<p>入站后请先阅读此文</p><span id="more"></span><h1 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h1><p>唔….欢迎光临小站AWA这个站点是站主用来试手的第一个站点～。所以说如果本站之后出现了什么问题请勿惊讶（笑）。</p><p>然后的话，本站是借用github的免费域名＋Hexo进行搭建，主要用作个人博客。</p><p><strong>内容：</strong></p><p>由于站主看的东西比较杂，所以说今后的文章标题会比如下格式命名：</p><p>  ［类别］＋标题名称</p><p>类别包括但不限于：新闻时政，游戏分享，游戏资讯，好书推荐，技术栈，奇思妙想，音乐闲话，影视剧分享及推荐，历史茶馆等等。</p><hr><h1 id="题外话："><a href="#题外话：" class="headerlink" title="题外话："></a>题外话：</h1><p>有关分享的内容，大都以网盘链接出现，包括但不限于：阿里云盘，百度云盘，夸克网盘，蓝奏云等，可以提前注册好。</p><p>还会有磁力链接或种子，若不知道如何使用 <a href="https://zhuanlan.zhihu.com/p/482703795" title="磁力链接使用方式。">看这个</a>。</p><p>噢对了！由于本站是静态站点，所以不会有评论区等需要数据库的功能出现，当然，如果大家多多光顾小站，再点点收藏啥的（坏笑）。站主就自掏腰包租个服务器（awa）</p><p>要是有技术佬的话，请加<a href="https://abyss-stars.github.io/" title="2359933809">Q</a>，想请教一些问题QAQ.</p><p>还需要说明的是，在每篇文章的最后可能会有站主夹带的“私货”，若不感兴趣可直接略去。</p>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h1 id=&quot;简介：&quot;&gt;&lt;a href=&quot;#简介：&quot; class=&quot;headerlink&quot; title=&quot;简介：&quot;&gt;&lt;/a&gt;简介：&lt;/h1&gt;&lt;p&gt;唔….欢迎光临小站AWA这个站点是站主用来试手的第一个站点～。所以说如果本站之后出现了什么问题请勿惊讶（笑）。&lt;/p&gt;
-&lt;p&gt;然后的</summary>
-      
+    <summary type="html">&lt;p&gt;入站后请先阅读此文&lt;/p&gt;</summary>
     
     
     
