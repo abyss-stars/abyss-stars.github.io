@@ -10,7 +10,21 @@
   <rights>All rights reserved 2026, abyss-stars</rights>
   <subtitle>蓦然回首，那人却在灯火阑珊处。</subtitle>
   <title>枫夜亭</title>
-  <updated>2026-09-06T03:01:23.423Z</updated>
+  <updated>2026-09-30T11:15:22.951Z</updated>
+  <entry>
+    <author>
+      <name>abyss-stars</name>
+    </author>
+    <category term="每周杂谈" scheme="https://www.abyss-stars.top/categories/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%88/"/>
+    <id>https://www.abyss-stars.top/2026/09/30/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%8825/</id>
+    <link href="https://www.abyss-stars.top/2026/09/30/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%8825/"/>
+    <published>2026-09-30T11:15:00.000Z</published>
+    <summary>
+      <![CDATA[<p>最近几天阴雨连绵，还没到晚上，天色就暗下来了，灰蒙蒙的给眼睛上了一层薄雾。从宿舍走向小卖部的路上下着小雨，地上的积水反射出了路旁的宿舍楼，在一圈圈的涟漪中逐渐模糊。进了超市，刺眼的白光将室内照的亮堂，和外面阴翳的天空形成了鲜明的对比。</p>]]>
+    </summary>
+    <title>【每周杂谈25】国庆快乐,朋友们</title>
+    <updated>2026-09-30T11:15:22.951Z</updated>
+  </entry>
   <entry>
     <author>
       <name>abyss-stars</name>
@@ -276,19 +290,5 @@
     </summary>
     <title>【每周杂谈6】3D模型的提取</title>
     <updated>2025-09-09T14:20:12.079Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>abyss-stars</name>
-    </author>
-    <category term="每周杂谈" scheme="https://www.abyss-stars.top/categories/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%88/"/>
-    <id>https://www.abyss-stars.top/2025/08/31/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%885/</id>
-    <link href="https://www.abyss-stars.top/2025/08/31/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%885/"/>
-    <published>2025-08-31T13:37:00.000Z</published>
-    <summary>
-      <![CDATA[<p>每次写杂谈的时候总是会有种负罪感，本来是自己定的周末更新，但事实总是会因为懒惰或者其它原因而拖延每次写杂谈的时间。内容也绝对算不上充实，只能说是记录某一周干了些什么或者发生了什么的流水账，翻看前面几篇blog就会发现这种文字是无趣且呆滞的，可能是我将它作为了每周的任务而不是一种爱好？这是我觉得需要改进的地方。</p>]]>
-    </summary>
-    <title>【每周杂谈5】关于二游</title>
-    <updated>2025-09-04T13:38:20.703Z</updated>
   </entry>
 </feed>
