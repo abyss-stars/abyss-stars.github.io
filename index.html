@@ -66,6 +66,7 @@
       
     <main class="content on">
       
+
 <section class="cover">
     
   <div class="cover-frame">
@@ -76,7 +77,7 @@
       <h1><a href="/">枫夜亭</a></h1>
       <div id="subtitle-box">
         
-          <span id="subtitle">愿你出走半生，归来仍是少年。</span>
+        <span id="subtitle">愿你出走半生，归来仍是少年。</span>
         
       </div>
       <div>
@@ -93,6 +94,58 @@
 
 
 <!-- Subtitle -->
+<script>
+  (function () {
+    var el = document.getElementById('subtitle');
+    if (!el) return;
+
+    var POOL = ["愿你出走半生，归来仍是少年。","蓦然回首，那人却在灯火阑珊处。"];
+    var SOURCE = "local";
+    var RANDOM = true;
+    var ANIMATE = false;
+
+    // 洗牌（Fisher–Yates）：random 为真时，让每次刷新都从句子池的不同位置开始
+    function shuffled(list) {
+      var a = list.slice();
+      if (!RANDOM || a.length < 2) return a;
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function run(strings) {
+      if (!strings || !strings.length) return;
+      if (ANIMATE && typeof Typed === 'function') {
+        try {
+          new Typed('#subtitle', {
+            strings: strings,
+            startDelay: 0,
+            typeSpeed: 200,
+            loop: false,
+            backSpeed: 100,
+            showCursor: false
+          });
+          return;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      el.textContent = strings[0]; // 兜底：typed.js 缺失/出错时直接显示整句
+    }
+
+    if (SOURCE === 'hitokoto') {
+      // 一言 API：每次刷新随机一句（句子池作为接口失败时的兜底）
+      fetch('https://v1.hitokoto.cn')
+        .then(function (r) { return r.json(); })
+        .then(function (data) { run([data.hitokoto]); })
+        .catch(function () { run(shuffled(POOL)); });
+    } else {
+      run(shuffled(POOL));
+    }
+  })();
+</script>
 
 <div id="main">
   <section class="outer">
