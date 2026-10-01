@@ -119,6 +119,7 @@
         var GENRE = "";
         var LINES = 1;
         var RANDOM_LINE = true;
+        var TITLE_MAX = 20;
         var FALLBACK = "愿你出走半生，归来仍是少年。";
 
         // 署名前的间距（配置项 broadcast.gap；用不换行空格，普通空格会被折叠）
@@ -141,12 +142,18 @@
             return content.slice(start, start + n);
         }
 
-        // 数据源里混着少量「存目」条目（形如「诗题：…首句：…」），命中就再换一首，
-        // 最多重试 2 次，免得这种东西出现在首页牌子上。
+        // 换一首的几种情况：
+        //   1) 诗名以「存目」开头（不是正文，是目录条目）
+        //   2) 诗句里含「诗题：」「首句：」（同上，是索引入口而非诗句）
+        //   3) 取到的诗句总长超过 40 字
+        //   4) 诗名超过 TITLE_MAX 个字（超长诗名会把牌子撑得很高）
         function looksBad(p, lines) {
             var text = lines.join("");
-            return /^存目/.test(p.title || "") || text.indexOf("诗题：") >= 0 ||
-                   text.indexOf("首句：") >= 0 || text.length > 40;
+            var title = p.title || "";
+            return /^存目/.test(title) ||
+                   text.indexOf("诗题：") >= 0 || text.indexOf("首句：") >= 0 ||
+                   text.length > 40 ||
+                   (TITLE_MAX > 0 && title.length > TITLE_MAX);
         }
 
         function show(p, lines) {
