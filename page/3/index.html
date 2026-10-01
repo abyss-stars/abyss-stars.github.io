@@ -101,18 +101,63 @@
   
 
 
+
 <div class="notice" style="margin-top:50px">
     <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad">愿你出走半生，归来仍是少年。</div>
+    <div class="notice-content" id="broad"></div>
 </div>
 <script type="text/javascript">
     (function () {
-        var POOL = ["愿你出走半生，归来仍是少年。","蓦然回首，那人却在灯火阑珊处。","山中何事？松花酿酒，春水煎茶。","此心安处是吾乡。"];
-        var RANDOM = true;
-        if (!RANDOM || POOL.length < 2) return;
+        /* 诗泉 API —— https://poetry.palemoky.com/
+           响应形如：{"data":{"title":"…","content":["行1","行2",…],
+                             "author":{"id":…,"name":"苏轼"},…},"lang":"zh-Hans"}
+           注意：作者写错时接口**仍返回 200**，只是 content 变成空数组，
+           所以「空结果」也必须当作失败来处理。
+           显示格式：诗句——诗人《诗名》 */
+        var API = "https://poetry.palemoky.com/api/poems/random";
+        var AUTHOR = "苏轼";
+        var GENRE = "";
+        var LINES = 1;
+        var FALLBACK = "愿你出走半生，归来仍是少年。";
+
         var el = document.getElementById("broad");
         if (!el) return;
-        el.textContent = POOL[Math.floor(Math.random() * POOL.length)];
+
+        var qs = [];
+        if (AUTHOR) qs.push("author=" + encodeURIComponent(AUTHOR));
+        if (GENRE) qs.push("type=" + encodeURIComponent(GENRE));
+        var url = API + (qs.length ? "?" + qs.join("&") : "");
+
+        // 数据源里混着少量「存目」条目（形如「诗题：…首句：…」），命中就再换一首，
+        // 最多重试 2 次，免得这种东西出现在首页牌子上。
+        function looksBad(p) {
+            var first = (p.content && p.content[0]) || "";
+            return /^存目/.test(p.title || "") || first.indexOf("诗题：") >= 0 ||
+                   first.indexOf("首句：") >= 0 || first.length > 40;
+        }
+
+        function show(p, lines) {
+            var verse = lines.join("");
+            var author = (p.author && p.author.name) || "";
+            el.textContent = verse + "——" + author + "《" + (p.title || "") + "》";
+        }
+
+        function attempt(left) {
+            fetch(url, { cache: "no-store" })
+                .then(function (r) { return r.json(); })
+                .then(function (res) {
+                    var p = (res && res.data) || {};
+                    var lines = (p.content || []).slice(0, LINES);
+                    if (!lines.length) throw new Error("empty");
+                    if (left > 0 && looksBad(p)) return attempt(left - 1);
+                    show(p, lines);
+                })
+                .catch(function () {
+                    // 网络故障 / 空结果 / 解析失败：用配置里的句子兜底，不再重试
+                    if (FALLBACK) el.textContent = FALLBACK;
+                });
+        }
+        attempt(2);
     })();
 </script>
 
