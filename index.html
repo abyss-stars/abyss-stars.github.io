@@ -118,7 +118,11 @@
         var AUTHOR = "苏轼";
         var GENRE = "";
         var LINES = 1;
+        var RANDOM_LINE = true;
         var FALLBACK = "愿你出走半生，归来仍是少年。";
+
+        // 署名前的间距（配置项 broadcast.gap；用不换行空格，普通空格会被折叠）
+        var GAP = "   ";
 
         var el = document.getElementById("broad");
         if (!el) return;
@@ -128,18 +132,26 @@
         if (GENRE) qs.push("type=" + encodeURIComponent(GENRE));
         var url = API + (qs.length ? "?" + qs.join("&") : "");
 
+        // 从正文里取 lines 行：默认从随机位置起取，这样同一首诗也不会总是
+        // 只看到开头那一句；random_line 设 false 则固定从第一行起取。
+        function pickLines(content, n) {
+            if (!content.length) return [];
+            if (!RANDOM_LINE || content.length <= n) return content.slice(0, n);
+            var start = Math.floor(Math.random() * (content.length - n + 1));
+            return content.slice(start, start + n);
+        }
+
         // 数据源里混着少量「存目」条目（形如「诗题：…首句：…」），命中就再换一首，
         // 最多重试 2 次，免得这种东西出现在首页牌子上。
-        function looksBad(p) {
-            var first = (p.content && p.content[0]) || "";
-            return /^存目/.test(p.title || "") || first.indexOf("诗题：") >= 0 ||
-                   first.indexOf("首句：") >= 0 || first.length > 40;
+        function looksBad(p, lines) {
+            var text = lines.join("");
+            return /^存目/.test(p.title || "") || text.indexOf("诗题：") >= 0 ||
+                   text.indexOf("首句：") >= 0 || text.length > 40;
         }
 
         function show(p, lines) {
-            var verse = lines.join("");
             var author = (p.author && p.author.name) || "";
-            el.textContent = verse + "——   " + author + "《" + (p.title || "") + "》";
+            el.textContent = lines.join("") + "——" + GAP + author + "《" + (p.title || "") + "》";
         }
 
         function attempt(left) {
@@ -147,9 +159,9 @@
                 .then(function (r) { return r.json(); })
                 .then(function (res) {
                     var p = (res && res.data) || {};
-                    var lines = (p.content || []).slice(0, LINES);
+                    var lines = pickLines(p.content || [], LINES);
                     if (!lines.length) throw new Error("empty");
-                    if (left > 0 && looksBad(p)) return attempt(left - 1);
+                    if (left > 0 && looksBad(p, lines)) return attempt(left - 1);
                     show(p, lines);
                 })
                 .catch(function () {
