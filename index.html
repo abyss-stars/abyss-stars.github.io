@@ -100,7 +100,6 @@
     if (!el) return;
 
     var POOL = ["愿你出走半生，归来仍是少年。"];
-    var SOURCE = "local";
     var RANDOM = false;
     var ANIMATE = false;
 
@@ -135,15 +134,9 @@
       el.textContent = strings[0]; // 兜底：typed.js 缺失/出错时直接显示整句
     }
 
-    if (SOURCE === 'hitokoto') {
-      // 一言 API：每次刷新随机一句（句子池作为接口失败时的兜底）
-      fetch('https://v1.hitokoto.cn')
-        .then(function (r) { return r.json(); })
-        .then(function (data) { run([data.hitokoto]); })
-        .catch(function () { run(shuffled(POOL)); });
-    } else {
-      run(shuffled(POOL));
-    }
+    
+    run(shuffled(POOL));
+    
   })();
 </script>
 
