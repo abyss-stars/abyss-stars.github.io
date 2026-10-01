@@ -77,7 +77,7 @@
       <h1><a href="/">枫夜亭</a></h1>
       <div id="subtitle-box">
         
-        <span id="subtitle">愿你出走半生，归来仍是少年。</span>
+        <span id="subtitle" class="trail-punct">愿你出走半生，归来仍是少年。</span>
         
       </div>
       <div>
@@ -114,8 +114,18 @@
       return a;
     }
 
+    // 句末是「左靠」全角标点时，把整句右移半个空白，让视觉重心回到中线上
+    // （原因见本文件顶部的注释）
+    function applyTrail(s) {
+      if (el.classList) {
+        if (/[。，、；：…]\s*$/.test(String(s || ''))) el.classList.add('trail-punct');
+        else el.classList.remove('trail-punct');
+      }
+    }
+
     function run(strings) {
       if (!strings || !strings.length) return;
+      applyTrail(strings[0]);
       if (ANIMATE && typeof Typed === 'function') {
         try {
           new Typed('#subtitle', {
@@ -139,6 +149,17 @@
     
   })();
 </script>
+
+<style>
+  /* 句末全角标点（。，、；：…）的字形只占字身左侧，右边空出约半个字符宽。
+     居中排版时这段空白会被算进行宽，把整句的视觉重心往左拽 —— 实测在
+     3rem 字号下偏左 4.5px（= 0.15em）。这里用 transform 做纯视觉补偿，
+     不改变布局与换行；换成不以标点结尾的句子时该类不会加上，也就不受影响。*/
+  #subtitle.trail-punct {
+    display: inline-block;
+    transform: translateX(0.15em);
+  }
+</style>
 
 <div id="main">
   <section class="outer">
