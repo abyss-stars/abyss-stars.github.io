@@ -113,7 +113,7 @@
                              "author":{"id":…,"name":"苏轼"},…},"lang":"zh-Hans"}
            注意：作者写错时接口**仍返回 200**，只是 content 变成空数组，
            所以「空结果」也必须当作失败来处理。
-           显示格式：诗句——诗人《诗名》 */
+           显示格式：诗句—— 诗人《诗名》 */
         var API = "https://poetry.palemoky.com/api/poems/random";
         var AUTHOR = "苏轼";
         var GENRE = "";
@@ -139,7 +139,7 @@
         function show(p, lines) {
             var verse = lines.join("");
             var author = (p.author && p.author.name) || "";
-            el.textContent = verse + "——" + author + "《" + (p.title || "") + "》";
+            el.textContent = verse + "—— " + author + "《" + (p.title || "") + "》";
         }
 
         function attempt(left) {
