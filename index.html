@@ -99,9 +99,9 @@
     var el = document.getElementById('subtitle');
     if (!el) return;
 
-    var POOL = ["愿你出走半生，归来仍是少年。","蓦然回首，那人却在灯火阑珊处。"];
+    var POOL = ["愿你出走半生，归来仍是少年。"];
     var SOURCE = "local";
-    var RANDOM = true;
+    var RANDOM = false;
     var ANIMATE = false;
 
     // 洗牌（Fisher–Yates）：random 为真时，让每次刷新都从句子池的不同位置开始
@@ -153,18 +153,22 @@
   
   
 
+
 <div class="notice" style="margin-top:50px">
     <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
+    <div class="notice-content" id="broad">愿你出走半生，归来仍是少年。</div>
 </div>
 <script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
+    (function () {
+        var POOL = ["愿你出走半生，归来仍是少年。","蓦然回首，那人却在灯火阑珊处。","山中何事？松花酿酒，春水煎茶。","此心安处是吾乡。"];
+        var RANDOM = true;
+        if (!RANDOM || POOL.length < 2) return;
+        var el = document.getElementById("broad");
+        if (!el) return;
+        el.textContent = POOL[Math.floor(Math.random() * POOL.length)];
+    })();
 </script>
+
 
 <style>
     .notice {
@@ -192,6 +196,7 @@
         vertical-align: middle;
     }
 </style>
+
   
   <article class="articles">
     
