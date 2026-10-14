@@ -1,0 +1,213 @@
+/* ============================================================================
+   枫夜亭 · 黑夜模式（正式版，自 2026-10 起替代主题自带的 body.darkmode）
+   ----------------------------------------------------------------------------
+   为什么另起一个文件，而不是改 themes/ayer/source-src/css/_darkmode.styl？
+     因为 source-src/ 是 rollup 的输入，而本站未安装主题的构建依赖（rollup 等），
+     _darkmode.styl 改完不会被任何构建步骤消费；`source/dist/main.css` 是上游
+     预编译产物。本文件放在 source/css/ 下，由 hexo-renderer-stylus 之外的静态
+     资源流程逐字节复制，`hexo generate` 每次都会产出 /css/darkmode.css，
+     且在 head.ejs 里排在 main.css / custom.css 之后，天然覆盖。
+
+   挂载点变更（关键）
+     旧实现：类挂在 <body> 上，由文档末尾的 dist/main.js 添加
+             → 首屏必然先渲染一帧白（FOUC），且 main.js 前面还压着外部 CDN 脚本
+     新实现：类挂在 <html> 上，由 head.ejs 里的内联脚本在**任何 CSS 之前**加好
+             → 首帧即正确颜色；main.css 里所有 body.darkmode 规则由此自然失效
+               （保留不删，作为"旧实现已停用"的现场记录）
+
+   设计要点
+     · 不用纯黑底 + 纯白字（夜间眩光），改用 #0f1115 ~ #1e232c 的亮度分层
+     · 不用「半透明黑纱蒙白页」做降亮度，而是换一整套暗色调色板
+     · 对比度：正文 15.4:1 / 次要 7.5:1 / 链接 8.8:1（旧实现分别是 4.6 / — / 与正文同色）
+     · color-scheme: dark 一并接管原生控件、滚动条与表单
+     · 类名沿用 .darkmode —— Twikoo 内建识别该祖先选择器，无需额外改动
+   ============================================================================ */
+
+html.darkmode {
+  color-scheme: dark;
+
+  --bg:           #0f1115; /* 页面底 */
+  --surface:      #161a21; /* 侧栏 / 面板 */
+  --surface-2:    #1e232c; /* 药丸 / 按钮 / 输入框 */
+  --fg:           #e6e8eb; /* 正文（15.4:1） */
+  --fg-muted:     #9aa4b2; /* 次要文字（7.5:1） */
+  --border:       #262d38;
+  --accent:       #6cb6ff; /* 链接（8.8:1） */
+  --accent-hover: #9ccdff;
+  --code-bg:      #12161d;
+  --inline-code:  #ffb4a9;
+}
+
+/* ---------- 基础 ---------- */
+html.darkmode body {
+  background-color: var(--bg) !important;
+  color: var(--fg) !important;
+  transition: background-color .25s ease, color .25s ease;
+}
+html.darkmode ::selection { background: #2f4a6b; color: #fff; }
+html.darkmode a { color: var(--accent); }
+html.darkmode a:hover { color: var(--accent-hover); }
+
+/* ---------- 侧栏 ---------- */
+html.darkmode .sidebar { background-color: var(--surface) !important; }
+html.darkmode .sidebar .navbar .nav .nav-item-link { color: var(--fg-muted); }
+html.darkmode .sidebar .navbar .nav .nav-item-link:hover { color: var(--fg); background-color: var(--surface-2); }
+html.darkmode .site-title a,
+html.darkmode .sidebar .site-meta { color: var(--fg); }
+
+/* ---------- 标题 / 正文 ---------- */
+html.darkmode .article-header .article-title,
+html.darkmode .archive-article-title,
+html.darkmode .article-entry h1, html.darkmode .article-entry h2,
+html.darkmode .article-entry h3, html.darkmode .article-entry h4,
+html.darkmode .article-entry h5, html.darkmode .article-entry h6,
+html.darkmode .article-entry strong,
+html.darkmode .article-entry b,
+html.darkmode .article .sea-center,
+html.darkmode .categories-box a {
+  color: var(--fg) !important;
+}
+html.darkmode .article-header .article-title { border-left-color: var(--accent) !important; }
+html.darkmode .article-entry { color: #d5d9df !important; }
+html.darkmode .article-entry p,
+html.darkmode .article-entry li,
+html.darkmode .article-entry td { color: #d5d9df; }
+/* 旧实现的 `*{color:#f2f2f2}` 会把 a{color:#0681d0} 一起刷白，链接失去可识别性；
+   这里显式恢复链接色并补下划线 */
+html.darkmode .article-entry a { color: var(--accent); text-decoration: underline; text-underline-offset: .2em; }
+
+/* 次要信息（日期 / 分类 / 字数 / 计数） */
+html.darkmode .article-date,
+html.darkmode .article-category .article-category-link,
+html.darkmode .archive-article-date,
+html.darkmode .archive-year-wrap .archive-year,
+html.darkmode .word_count,
+html.darkmode .tag-list > .tag-list-item:before,
+html.darkmode .article-tag-list:before,
+html.darkmode .category-list .category-list-item i,
+html.darkmode .category-list a:hover .category-list-item,
+html.darkmode .share-outer i,
+html.darkmode .article-header .article-author {
+  color: var(--fg-muted) !important;
+}
+
+/* ---------- 标签药丸 ---------- */
+html.darkmode .tag-list > .tag-list-item .tag-list-link,
+html.darkmode .article-tag-list .article-tag-list-link {
+  background-color: var(--surface-2) !important;
+  color: var(--fg-muted) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- 代码 ---------- */
+/* 代码块本身沿用主题自带的 Monokai 系着色（#2d2d2d 底），这里只把底色收进令牌、
+   并修掉「浅灰底 + 红字」的行内 code（暗色下是一块刺眼的亮斑） */
+html.darkmode .article-entry code {
+  background: var(--surface-2) !important;
+  color: var(--inline-code) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode .article-entry pre,
+html.darkmode .article-entry .highlight {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode .article-entry .highlight figcaption { color: var(--fg-muted); }
+
+/* ---------- 引用 / 分隔线 / 表格 ---------- */
+html.darkmode .article-entry blockquote {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  color: var(--fg-muted);
+}
+html.darkmode .article-entry hr { background-color: var(--border) !important; }
+html.darkmode .article-entry table td,
+html.darkmode .article-entry table th { border-color: var(--border) !important; }
+html.darkmode .article-entry table tr { background-color: transparent !important; }
+html.darkmode .article-entry table tbody tr:hover { background-color: var(--surface) !important; }
+
+/* ---------- 浅色边框：暗色下最容易漏的一类（实测残留过一行 #f6f6f6） ---------- */
+html.darkmode .articles .article:not(:last-child) { border-bottom-color: var(--border) !important; }
+html.darkmode .article-nav { border-top-color: var(--border) !important; }
+html.darkmode .declare { border-bottom-color: var(--border) !important; color: var(--fg-muted) !important; }
+html.darkmode .categories-box { border-left-color: var(--border) !important; }
+html.darkmode .categories-box ul li,
+html.darkmode .categories-box ol li { border-bottom-color: var(--border) !important; }
+html.darkmode .archive-article-inner { border-bottom-color: var(--border) !important; }
+
+/* ---------- 页脚 ---------- */
+html.darkmode .footer { border-top-color: var(--border) !important; color: var(--fg-muted); }
+html.darkmode .footer .outer > ul li a,
+html.darkmode .footer .outer > ul li { color: var(--fg-muted); }
+
+/* ---------- 浮动按钮（回到顶部 / 黑夜模式） ---------- */
+/* 原来是 #efefef 的亮白圆，在暗色页面上非常刺眼 */
+html.darkmode .totop,
+html.darkmode .todark {
+  background-color: var(--surface-2) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode .totop i,
+html.darkmode .todark i,
+html.darkmode .float_btns i { color: var(--fg-muted) !important; }
+html.darkmode .totop:hover,
+html.darkmode .todark:hover { background-color: #262e3a !important; border-color: #39424f; }
+
+/* ---------- 搜索面板 ---------- */
+/* 旧实现把输入框文字设成 #7a7a7a 压在 rgba(64,62,62,.9) 面板上，对比度仅约 2.1:1 */
+html.darkmode .local-search {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.5) !important;
+}
+html.darkmode .local-search-input {
+  background-color: var(--surface-2) !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode .local-search-input::placeholder { color: var(--fg-muted); }
+html.darkmode .local-search-close { color: var(--fg-muted) !important; }
+html.darkmode .search-result-list li { color: var(--fg); }
+html.darkmode .search-result-list li em.search-keyword { color: var(--accent); }
+
+/* ---------- 文章目录（tocbot） ---------- */
+html.darkmode .tocbot a.toc-link { color: var(--fg-muted) !important; }
+html.darkmode .tocbot a.toc-link:hover,
+html.darkmode .tocbot a.toc-link.is-active-link { color: var(--fg) !important; }
+html.darkmode .is-position-fixed { background-color: var(--bg) !important; }
+
+/* ---------- 其它组件 ---------- */
+html.darkmode .articles .article-entry .article-more-link {
+  background-color: var(--surface-2) !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode .article-nav-link { color: var(--fg-muted); }
+html.darkmode .page-nav a { color: var(--fg-muted); }
+html.darkmode .page-nav .page-number.current { color: var(--bg); background: var(--accent); }
+html.darkmode #reward-btn { background: var(--surface-2); color: var(--fg); }
+html.darkmode #reward .close { background-color: var(--surface-2); }
+html.darkmode #reward .reward-p { color: var(--fg) !important; text-shadow: none; }
+html.darkmode #friends_link .friends_li a {
+  background-color: var(--surface) !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--border);
+}
+html.darkmode #friends_link .friends_li a:hover { border-color: var(--accent); }
+html.darkmode .share-icons a i { color: var(--fg-muted) !important; }
+html.darkmode .article-share-twitter,
+html.darkmode .article-share-facebook,
+html.darkmode .article-share-google,
+html.darkmode .article-share-pinterest { color: var(--fg-muted) !important; }
+html.darkmode .article-share-box { background: var(--surface) !important; border: 1px solid var(--border); }
+
+/* ---------- 图片：暗色下降低眩光 ---------- */
+html.darkmode .article-entry img,
+html.darkmode .article-entry video { filter: brightness(.88) contrast(1.02); }
+html.darkmode .cover-frame .bg-box > img { filter: brightness(.72) saturate(.92); }
+
+/* ---------- 滚动条 ---------- */
+html.darkmode ::-webkit-scrollbar { width: 10px; height: 10px; background: var(--bg); }
+html.darkmode ::-webkit-scrollbar-thumb { background: #2b323d; border-radius: 6px; }
+html.darkmode ::-webkit-scrollbar-thumb:hover { background: #39424f; }
+html.darkmode ::-webkit-scrollbar-track { background: var(--bg); }

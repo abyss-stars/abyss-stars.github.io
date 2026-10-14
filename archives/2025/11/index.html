@@ -18,6 +18,31 @@
       <title>归档: 2025/11 |  枫夜亭</title>
   <meta name="generator" content="hexo-theme-ayer">
       
+      
+      
+      
+      
+      <script>
+        (function () {
+          try {
+            var stored = localStorage.getItem("theme");
+            var fallback = "auto";
+            var dark;
+            if (stored === "dark" || stored === "light") {
+              dark = stored === "dark";
+            } else if (fallback === "dark" || fallback === "light") {
+              dark = fallback === "dark";
+            } else {
+              dark = !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+            }
+            var root = document.documentElement;
+            root.classList.toggle("darkmode", dark);
+            root.setAttribute("data-theme", stored || fallback);
+          } catch (e) {}
+        })();
+      </script>
+      
+      
       <link rel="shortcut icon" href="/favicon.ico" />
        
 <link rel="stylesheet" href="/dist/main.css">
@@ -27,7 +52,11 @@
 
       
 <link rel="stylesheet" href="/css/custom.css">
- 
+
+      
+<link rel="stylesheet" href="/css/darkmode.css">
+
+      
       <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
        
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -176,13 +205,14 @@
 </footer>    
     </main>
     <div class="float_btns">
-      <div class="totop" id="totop">
+      <div class="totop" id="totop" role="button" tabindex="0" aria-label="回到顶部">
   <i class="ri-arrow-up-line"></i>
 </div>
 
-<div class="todark" id="todark">
+<div class="todark" id="todark" role="button" tabindex="0" aria-label="切换黑夜模式" aria-pressed="false">
   <i class="ri-moon-line"></i>
 </div>
+
 
     </div>
     <aside class="sidebar on">
