@@ -48,12 +48,24 @@ html.darkmode ::selection { background: #2f4a6b; color: #fff; }
 html.darkmode a { color: var(--accent); }
 html.darkmode a:hover { color: var(--accent-hover); }
 
+/* 例外：封面（banner）上的站点标题与副标题是压在图片上的，两种模式都必须保持白色。
+   主题原本靠 `.cover-inner,.cover-inner a{color:#fff}` 指定，特异性只有 (0,1,1)，
+   会被上面 `html.darkmode a` 的 (0,1,2) 压成链接蓝 —— 必须显式复位。 */
+html.darkmode .cover-inner,
+html.darkmode .cover-inner h1,
+html.darkmode .cover-inner h1 a,
+html.darkmode .cover-inner a:hover,
+html.darkmode #subtitle-box,
+html.darkmode #subtitle {
+  color: #fff !important;
+}
+
 /* ---------- 侧栏 ---------- */
 html.darkmode .sidebar { background-color: var(--surface) !important; }
 html.darkmode .sidebar .navbar .nav .nav-item-link { color: var(--fg-muted); }
 html.darkmode .sidebar .navbar .nav .nav-item-link:hover { color: var(--fg); background-color: var(--surface-2); }
-html.darkmode .site-title a,
-html.darkmode .sidebar .site-meta { color: var(--fg); }
+/* 侧栏 logo 是 <a><img></a>，命中不到文字色；这条只在图片加载失败、露出 alt 文本时生效 */
+html.darkmode .sidebar .logo a { color: var(--fg); }
 
 /* ---------- 标题 / 正文 ---------- */
 html.darkmode .article-header .article-title,
