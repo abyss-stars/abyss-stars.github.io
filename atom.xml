@@ -10,7 +10,21 @@
   <rights>All rights reserved 2026, abyss-stars</rights>
   <subtitle>蓦然回首，那人却在灯火阑珊处。</subtitle>
   <title>枫夜亭</title>
-  <updated>2026-09-30T11:15:22.951Z</updated>
+  <updated>2026-10-26T10:13:42.339Z</updated>
+  <entry>
+    <author>
+      <name>abyss-stars</name>
+    </author>
+    <category term="每周杂谈" scheme="https://www.abyss-stars.top/categories/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%88/"/>
+    <id>https://www.abyss-stars.top/2026/10/26/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%8826/</id>
+    <link href="https://www.abyss-stars.top/2026/10/26/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%8826/"/>
+    <published>2026-10-26T10:13:00.000Z</published>
+    <summary>
+      <![CDATA[<p>又是快一个月过去没有写些什么了，很多让我短暂触动的事物很难维持当时的感触，于是写些什么的念头就这么消逝了。这篇本来是【赛博朋克：边缘行者第二季】的主题杂谈，可是动漫中的人物又让我想起了之前看过的让我触动的东西，再加上短短十集无法完整梳理完一个多线并行世界观下的理念，从而让角色的一些行为和结局变得有些莫名其妙。以下可能涉及一些剧透，请谨慎观看。</p>]]>
+    </summary>
+    <title>【每周杂谈26】赛博朋克:边缘行者第二季短评</title>
+    <updated>2026-10-26T10:13:42.339Z</updated>
+  </entry>
   <entry>
     <author>
       <name>abyss-stars</name>
@@ -276,19 +290,5 @@
     </summary>
     <title>【每周杂谈7】社会新闻</title>
     <updated>2025-09-15T14:06:39.496Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>abyss-stars</name>
-    </author>
-    <category term="每周杂谈" scheme="https://www.abyss-stars.top/categories/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%88/"/>
-    <id>https://www.abyss-stars.top/2025/09/09/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%886/</id>
-    <link href="https://www.abyss-stars.top/2025/09/09/%E6%AF%8F%E5%91%A8%E6%9D%82%E8%B0%886/"/>
-    <published>2025-09-09T13:37:00.000Z</published>
-    <summary>
-      <![CDATA[<p>突然发现自己喜欢将本该周末发布的东西放到周二来写，所以我想着要不就当这个杂谈是每周二发布？但转念一想如果我自己给自己定下了每周二发布的目标，估计会将其拖延到每周四再写吧，所以大家可以把这个杂谈当作一个周二发布的。。呃。。周日杂谈？</p>]]>
-    </summary>
-    <title>【每周杂谈6】3D模型的提取</title>
-    <updated>2025-09-09T14:20:12.079Z</updated>
   </entry>
 </feed>
